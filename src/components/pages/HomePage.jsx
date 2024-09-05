@@ -21,7 +21,7 @@ export default function HomePage() {
   return (
     <header>
       <p>Home</p>
-      {/* <Navigation /> */}
+      <Navigation />
     </header>
   );
 }
