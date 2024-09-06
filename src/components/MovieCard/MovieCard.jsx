@@ -1,15 +1,10 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export default function MovieCard({ movie }) {
   return (
     <>
-      <div>
-        <img
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt=""
-        />
-      </div>
-      <p>{movie.original_title}</p>
+      <Link>{movie.original_title}</Link>
       <p>Rating: {movie.vote_average}</p>
     </>
   );

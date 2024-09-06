@@ -5,6 +5,7 @@ import MovieList from "../MovieList/MovieList";
 export default function MoviesPage() {
   const [query, setQuery] = useState("");
   const [list, setList] = useState([]);
+  const [movie, setMovie] = useState(null);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -31,6 +32,11 @@ export default function MoviesPage() {
     }
     getMovie();
   }, [query]);
+
+  const onClickMovieCard = (card) => {
+    console.log(card);
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -38,7 +44,9 @@ export default function MoviesPage() {
         <input type="text" id="searchMovie" name="searchMovie" />
       </form>
 
-      {list.length > 0 && <MovieList movies={list} />}
+      {list.length > 0 && (
+        <MovieList movies={list} onClick={onClickMovieCard} />
+      )}
     </div>
   );
 }
