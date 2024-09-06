@@ -1,6 +1,6 @@
-import Navigation from "../Navigation/Navigation";
-import getDefaultMoviesList from "../Service/movie-api";
+import getDefaultMoviesList from "../Service/trendingMovies-api";
 import { useEffect, useState } from "react";
+import MovieList from "../MovieList/MovieList";
 
 export default function HomePage() {
   const [defaultList, setDefaultList] = useState([]);
@@ -19,9 +19,9 @@ export default function HomePage() {
   }, []);
 
   return (
-    <header>
-      <p>Home</p>
-      <Navigation />
-    </header>
+    <>
+      <h1>Trending today</h1>
+      {defaultList.length > 0 && <MovieList movies={defaultList} />}
+    </>
   );
 }

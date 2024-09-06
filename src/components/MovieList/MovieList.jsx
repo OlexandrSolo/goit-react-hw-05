@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import MovieCard from "../MovieCard/MovieCard";
 
-export function MovieList({ movies }) {
+export default function MovieList({ movies }) {
   console.log(movies);
   return (
     <ul>
