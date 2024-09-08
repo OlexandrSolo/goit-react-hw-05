@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import getSearchMovie from "../Service/searchMovie-api";
 import MovieList from "../MovieList/MovieList";
+import getMovieById from "../Service/movieDetails-api";
+import { func } from "prop-types";
 
 export default function MoviesPage() {
   const [query, setQuery] = useState("");
   const [list, setList] = useState([]);
+  const [idMovie, setIdMovie] = useState(0);
   const [movie, setMovie] = useState(null);
 
   const handleSubmit = (evt) => {
@@ -28,13 +31,32 @@ export default function MoviesPage() {
       } catch (error) {
         console.log(error);
       } finally {
+        setQuery("");
       }
     }
     getMovie();
   }, [query]);
 
-  const onClickMovieCard = (card) => {
-    console.log(card);
+  useEffect(() => {
+    if (idMovie === 0) {
+      return;
+    }
+    async function fetchMovieById() {
+      try {
+        const movie = await getMovieById(idMovie);
+        console.log(movie);
+        setMovie(movie);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIdMovie(0);
+      }
+    }
+    fetchMovieById();
+  }, [idMovie]);
+
+  const onClickMovieCard = (id) => {
+    setIdMovie(id);
   };
 
   return (
