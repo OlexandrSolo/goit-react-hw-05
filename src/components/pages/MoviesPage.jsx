@@ -1,14 +1,10 @@
 import { useEffect, useState } from "react";
 import getSearchMovie from "../Service/searchMovie-api";
 import MovieList from "../MovieList/MovieList";
-import getMovieById from "../Service/movieDetails-api";
-import { func } from "prop-types";
 
 export default function MoviesPage() {
   const [query, setQuery] = useState("");
   const [list, setList] = useState([]);
-  const [idMovie, setIdMovie] = useState(0);
-  const [movie, setMovie] = useState(null);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -31,33 +27,10 @@ export default function MoviesPage() {
       } catch (error) {
         console.log(error);
       } finally {
-        setQuery("");
       }
     }
     getMovie();
   }, [query]);
-
-  useEffect(() => {
-    if (idMovie === 0) {
-      return;
-    }
-    async function fetchMovieById() {
-      try {
-        const movie = await getMovieById(idMovie);
-        console.log(movie);
-        setMovie(movie);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setIdMovie(0);
-      }
-    }
-    fetchMovieById();
-  }, [idMovie]);
-
-  const onClickMovieCard = (id) => {
-    setIdMovie(id);
-  };
 
   return (
     <div>
@@ -66,9 +39,7 @@ export default function MoviesPage() {
         <input type="text" id="searchMovie" name="searchMovie" />
       </form>
 
-      {list.length > 0 && (
-        <MovieList movies={list} onClick={onClickMovieCard} />
-      )}
+      {list.length > 0 && <MovieList movies={list} />}
     </div>
   );
 }

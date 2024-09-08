@@ -1,15 +1,54 @@
-export default function MovieDetailsPage({ movie }) {
+import { useEffect, useState } from "react";
+import { NavLink, useParams, Outlet } from "react-router-dom";
+import getMovieById from "../Service/movieDetails-api";
+
+export default function MovieDetailsPage() {
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [movie, setMovie] = useState(null);
+  const { movieId } = useParams();
+
+  useEffect(() => {
+    async function fetchMovieById() {
+      try {
+        const movieQuery = await getMovieById(movieId);
+        setMovie(movieQuery);
+      } catch (error) {
+        console.log(error);
+      } finally {
+      }
+    }
+    fetchMovieById();
+  }, [movieId]);
+
   return (
     <div>
+      <NavLink to="/movies">Go Back</NavLink>
       <h1>About Movie</h1>
-      <div>
-        <img
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt=""
-        />
-      </div>
-      <p>{movie.original_title}</p>
-      <p>Rating: {movie.vote_average}</p>
+      {movie && (
+        <>
+          <div>
+            <img
+              src={`https://image.tmdb.org/t/p/w500${
+                movie.poster_path && movie.poster_path
+              }`}
+              alt={`${movie.original_title}`}
+            />
+          </div>
+          <p>{movie.original_title}</p>
+          <p>{movie.vote_average}</p>
+          <p>Rating: {movie.overview}</p>
+          <ul>
+            <li>
+              <NavLink to="cast">Cast</NavLink>
+            </li>
+            <li>
+              <NavLink to="reviews">Reviews</NavLink>
+            </li>
+          </ul>
+          <Outlet />
+        </>
+      )}
     </div>
   );
 }

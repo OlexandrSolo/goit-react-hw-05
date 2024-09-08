@@ -1,11 +1,27 @@
 import "./App.css";
 import Navigation from "../Navigation/Navigation";
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "../pages/HomePage";
+import MoviesPage from "../pages/MoviesPage";
+import NotFoundPage from "../pages/NotFoundPage";
+import MovieCast from "../MovieCast";
+import MovieReviews from "../MovieReviews";
+import MovieDetailsPage from "../pages/MovieDetailsPage";
 
 function App() {
   return (
     <>
       <Navigation />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movies" element={<MoviesPage />} />
+        <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+          <Route path="cast" element={<MovieCast />} />
+          <Route path="reviews" element={<MovieReviews />} />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </>
   );
 }
