@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import getMovieReviews from "../Service/movieReviews-api";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import Loading from "../Loading/Loading";
 import style from "../MovieReviews/MovieReviews.module.css";
 
 export default function MovieReviews() {
@@ -12,24 +14,32 @@ export default function MovieReviews() {
   useEffect(() => {
     async function fetchMovieById() {
       try {
+        setLoading(true);
         const movieInfo = await getMovieReviews(movieId);
         setReviews(movieInfo);
       } catch (error) {
-        console.log(error);
+        setError(error);
       } finally {
+        setLoading(false);
       }
     }
     fetchMovieById();
   }, [movieId]);
   return (
-    <ul>
-      {reviews.map((review) => (
-        <li key={review.id}>
-          <p className={style.author}>{review.author}</p>
-          <p className={style.content}>{review.content}</p>
-          <a href={review.url}>Link</a>
-        </li>
-      ))}
-    </ul>
+    <>
+      {loading && <Loading />}
+      {error && <ErrorMessage />}
+      <ul>
+        {reviews.map((review) => (
+          <li key={review.id}>
+            <p className={style.author}>{review.author}</p>
+            <p className={style.content}>{review.content}</p>
+            <a href={review.url} target="_blank">
+              Link
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }

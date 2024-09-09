@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { FcSearch } from "react-icons/fc";
+import toast, { Toaster } from "react-hot-toast";
 import getSearchMovie from "../Service/searchMovie-api";
 import MovieList from "../MovieList/MovieList";
 import style from "../pages/MoviesPage.module.css";
@@ -11,7 +13,9 @@ export default function MoviesPage() {
     evt.preventDefault();
     const form = evt.target;
     if (form.elements.searchMovie.value.trim() === "") {
-      return;
+      return toast("What? You must entered text", {
+        icon: "🔎",
+      });
     }
     setQuery(form.elements.searchMovie.value);
     form.reset();
@@ -41,6 +45,7 @@ export default function MoviesPage() {
         autoComplete="off"
       >
         <div className={style.group}>
+          <FcSearch className={style.searchIcon} />
           <input
             type="text"
             id="searchMovie"
@@ -50,7 +55,7 @@ export default function MoviesPage() {
           />
         </div>
       </form>
-
+      <Toaster position="bottom-center" reverseOrder={false} />
       {list.length > 0 && <MovieList movies={list} />}
     </div>
   );

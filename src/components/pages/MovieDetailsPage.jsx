@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { NavLink, useParams, Outlet } from "react-router-dom";
 import getMovieById from "../Service/movieDetails-api";
 import style from "./MovieDetailsPage.module.css";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import Loading from "../Loading/Loading";
 
 export default function MovieDetailsPage() {
   const [error, setError] = useState(false);
@@ -12,11 +14,13 @@ export default function MovieDetailsPage() {
   useEffect(() => {
     async function fetchMovieById() {
       try {
+        setLoading(true);
         const movieQuery = await getMovieById(movieId);
         setMovie(movieQuery);
       } catch (error) {
-        console.log(error);
+        setError(error);
       } finally {
+        setLoading(false);
       }
     }
     fetchMovieById();
@@ -26,6 +30,9 @@ export default function MovieDetailsPage() {
     <div className={style.container}>
       <NavLink to="/movies">Go Back</NavLink>
       <h1 className={style.title}>About Movie</h1>
+      {loading && <Loading />}
+      {error && <ErrorMessage />}
+
       {movie && (
         <div>
           <div className={style.cardWrapper}>

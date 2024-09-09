@@ -11,6 +11,7 @@
 }
 
 .formField {
+  position: relative;
   font-family: sans-serif;
   letter-spacing: 1px;
   font-size: 16px;
@@ -32,4 +33,10 @@
 .formField:not(:placeholder-shown) ~ .formLabel {
   font-size: 12px;
   color: #e0e0e0;
+}
+
+.searchIcon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
 }
