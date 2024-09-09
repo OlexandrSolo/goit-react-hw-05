@@ -1,0 +1,9 @@
+.movieGallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.itemGallery {
+  border: 1px solid #fff;
+}

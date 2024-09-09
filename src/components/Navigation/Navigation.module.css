@@ -1,0 +1,27 @@
+.container {
+  max-width: 1180px;
+  padding: 0 15px;
+  text-align: center;
+  background-color: rgba(209, 179, 179, 0.694);
+}
+.link {
+  padding: 15px 0;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: #fff;
+
+  &:not(:last-child) {
+    margin-right: 150px;
+  }
+
+  &.active {
+    color: rgba(145, 32, 225, 0.6);
+  }
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+}
