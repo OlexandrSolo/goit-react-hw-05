@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import getSearchMovie from "../Service/searchMovie-api";
 import MovieList from "../MovieList/MovieList";
+import style from "../pages/MoviesPage.module.css";
 
 export default function MoviesPage() {
   const [query, setQuery] = useState("");
@@ -34,9 +35,20 @@ export default function MoviesPage() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="searchMovie">Search</label>
-        <input type="text" id="searchMovie" name="searchMovie" />
+      <form
+        onSubmit={handleSubmit}
+        className={style.searchForm}
+        autoComplete="off"
+      >
+        <div className={style.group}>
+          <input
+            type="text"
+            id="searchMovie"
+            name="searchMovie"
+            className={style.formField}
+            placeholder="Search Movie"
+          />
+        </div>
       </form>
 
       {list.length > 0 && <MovieList movies={list} />}

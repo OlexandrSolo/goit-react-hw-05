@@ -1,0 +1,35 @@
+.searchForm {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  border-radius: 10px;
+  padding: 32px;
+  box-shadow: 0 4px 16 #ccc;
+  width: 300px;
+  font-family: sans-serif;
+  letter-spacing: 1px;
+}
+
+.formField {
+  font-family: sans-serif;
+  letter-spacing: 1px;
+  font-size: 16px;
+
+  width: 100%;
+  padding: 0 0px 10px 150px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: transparent;
+  outline: none;
+  transition: 0.3s;
+}
+
+.formField:focus {
+  border-bottom: 2px solid #1a73a8;
+}
+
+.formField:focus ~ .formLabel,
+.formField:not(:placeholder-shown) ~ .formLabel {
+  font-size: 12px;
+  color: #e0e0e0;
+}

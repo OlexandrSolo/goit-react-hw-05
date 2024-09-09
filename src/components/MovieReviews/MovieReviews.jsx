@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import getMovieReviews from "./Service/movieReviews-api";
+import getMovieReviews from "../Service/movieReviews-api";
+import style from "../MovieReviews/MovieReviews.module.css";
 
 export default function MovieReviews() {
   const [error, setError] = useState(false);
@@ -24,8 +25,8 @@ export default function MovieReviews() {
     <ul>
       {reviews.map((review) => (
         <li key={review.id}>
-          <p>{review.author}</p>
-          <p>{review.content}</p>
+          <p className={style.author}>{review.author}</p>
+          <p className={style.content}>{review.content}</p>
           <a href={review.url}>Link</a>
         </li>
       ))}

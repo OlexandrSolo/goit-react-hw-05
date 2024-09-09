@@ -2,8 +2,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 15px;
+  list-style-type: none;
 }
 
 .itemGallery {
-  border: 1px solid #fff;
+  padding-top: 25px;
+  border: 1px solid #7c7676d2;
+  width: calc((100% - 50px) / 5);
+  text-align: center;
+  border-radius: 5px;
+}
+.itemGallery:hover,
+.itemGallery:focus {
+  box-shadow: rgb(240, 238, 238) 0px 0px 16px 0px;
 }

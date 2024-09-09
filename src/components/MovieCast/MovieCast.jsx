@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import getMovieCast from "./Service/movieCredits-api";
+import getMovieCast from "../Service/movieCredits-api";
+import style from "../MovieCast/MovieCast.module.css";
 
 export default function MovieCast() {
   const [error, setError] = useState(false);
@@ -21,9 +22,9 @@ export default function MovieCast() {
     fetchMovieById();
   }, [movieId]);
   return (
-    <ul>
+    <ul className={style.castList}>
       {casts.map((cast) => (
-        <li key={cast.id}>
+        <li key={cast.id} className={style.castItem}>
           <div>
             <img
               src={`https://image.tmdb.org/t/p/w500${
@@ -31,6 +32,7 @@ export default function MovieCast() {
               }`}
               alt={`${cast.original_name}`}
               width="150px"
+              height="223px"
             />
           </div>
           <p>{cast.name}</p>

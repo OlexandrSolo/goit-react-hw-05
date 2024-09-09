@@ -4,8 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import MoviesPage from "../pages/MoviesPage";
 import NotFoundPage from "../pages/NotFoundPage";
-import MovieCast from "../MovieCast";
-import MovieReviews from "../MovieReviews";
+import MovieCast from "../MovieCast/MovieCast";
+import MovieReviews from "../MovieReviews/MovieReviews";
 import MovieDetailsPage from "../pages/MovieDetailsPage";
 
 function App() {
