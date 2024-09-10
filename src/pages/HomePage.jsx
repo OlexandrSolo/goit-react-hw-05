@@ -1,9 +1,9 @@
-import getDefaultMoviesList from "../Service/trendingMovies-api";
 import { useEffect, useState } from "react";
-import MovieList from "../MovieList/MovieList";
+import getDefaultMoviesList from "../components/Service/trendingMovies-api";
+import MovieList from "../components/MovieList/MovieList";
 import style from "../pages/HomePage.module.css";
-import ErrorMessage from "../ErrorMessage/ErrorMessage";
-import Loading from "../Loading/Loading";
+import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
+import Loading from "../components/Loading/Loading";
 
 export default function HomePage() {
   const [defaultList, setDefaultList] = useState([]);

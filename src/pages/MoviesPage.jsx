@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+import { useSearchParams, useLocation } from "react-router-dom";
 import { FcSearch } from "react-icons/fc";
 import toast, { Toaster } from "react-hot-toast";
-import getSearchMovie from "../Service/searchMovie-api";
-import MovieList from "../MovieList/MovieList";
+import getSearchMovie from "../components//Service/searchMovie-api";
+import MovieList from "../components/MovieList/MovieList";
 import style from "../pages/MoviesPage.module.css";
 
 export default function MoviesPage() {
-  const [query, setQuery] = useState("");
   const [list, setList] = useState([]);
+  const [params, setParams] = useSearchParams();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -17,12 +18,18 @@ export default function MoviesPage() {
         icon: "🔎",
       });
     }
-    setQuery(form.elements.searchMovie.value);
+    const searchMovie =
+      form.elements.searchMovie.value !== ""
+        ? form.elements.searchMovie.value
+        : {};
+    params.set("query", searchMovie);
+    setParams(params);
     form.reset();
   };
 
   useEffect(() => {
-    if (query === "") {
+    const query = params.get("query");
+    if (!query) {
       return;
     }
     async function getMovie() {
@@ -35,7 +42,7 @@ export default function MoviesPage() {
       }
     }
     getMovie();
-  }, [query]);
+  }, [params]);
 
   return (
     <div>
